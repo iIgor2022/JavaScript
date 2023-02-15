@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nn = Math.floor(Math.random() * 1000)
+        console.log(`random = ${nn}`)
+        while (true) {
+            let f = prompt("Введите число: ")
+            if (!isNaN(f)) {
+                if (f != nn) {
+                    if (f > nn) {
+                        alert("Больше");
+                    } else {
+                        alert("Меньше");
+                    };
+                } else {
+                    alert("Равно!");
+                    break;
+                }
+            } else {
+                alert("Введенный символ не является числом!");
+            }
+        }
+    </script>
+</body>
+</html>
