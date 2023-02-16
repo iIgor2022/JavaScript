@@ -96,11 +96,13 @@ function clear_basket() {
 
 function basket_count() {
     let total_summ = 0;
+    let total_amount = 0;
     for (item of basket) {
         total_summ += item.good.price * item.amount
+        total_amount += item.amount;
     };
     return {
-        totalAmount: basket.length,
+        totalAmount: total_amount,
         totalSumm: total_summ,
     };
 };
