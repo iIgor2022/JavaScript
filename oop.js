@@ -9,7 +9,7 @@ class Good {
     };
 
     setAvailable() {
-        this.available = !this.available;
+        this.available = false;
     };
 
 
@@ -62,17 +62,22 @@ class Basket {
     }
 
     get totalAmount() {
-        return this.goods.reduce(item => item.amount * item.good.price, 0);
+        return this.goods.reduce((acc, item) => acc + item.amount * item.price, 0);
+        // let result = 0
+        // for (let item of this.goods) {
+        //     result += item.amount * item.price
+        // }
+        // return result
     };
 
     get totalSum() {
-        return this.goods.reduce(this.goods.amount, 0);
+        return this.goods.reduce((acc, item) => acc + item.amount, 0);
     };
 
     add(good, amount) {   
-        const index = this.goods.findIndex(item => item.good === good);
+        const index = this.goods.findIndex(item => item.id === good.id);
         if (index > -1) {
-            this.goods.amount += amount;
+            this.goods[index].amount += amount;
         } else {
             const item = new BasketGood(good);
             item.amount = amount;
@@ -81,7 +86,7 @@ class Basket {
     };
 
     remove(good, amount) {
-        const index = this.goods.findIndex(item => item.good === good);
+        const index = this.goods.findIndex(item => item.id === good.id);
         if (index > -1) {
             this.goods[index].amount -= amount;
             if (this.goods[index].amount <= 0) {
@@ -117,9 +122,16 @@ goods_list.add(good5);
 basket = new Basket();
 
 basket.add(good1, 1)
+basket.add(good3, 2);
 
 console.log(goods_list.list)
 
-goods_list.remove(0)
+goods_list.remove(1)
+good1.setAvailable()
+basket.remove(good3, 1)
+basket.add(good1, 3);
+// basket.removeUnavailable()
 
+console.log(basket.totalAmount)
+console.log(basket.totalSum)
 console.log(goods_list.list)
